@@ -37,26 +37,21 @@ public class UseAction implements ActionListener {
 	}
 
 	@Override
-	public void onAction(final Player player, final RPAction action) {
-		// POISON CONDITIONAL
-		if (!player.hasStatus(StatusType.POISONED)) {
-		
-			String actionZone = action.get("zone");
-			// Always accept actions without the zone. Old clients send those.
-			if (actionZone != null && !actionZone.equals(player.getZone().getName())) {
-				return;
-			}
-			if (action.has(TARGET_PATH)) {
-				useEntityFromPath(player, action);
-			} else if (isItemInSlot(action)) {
-				// When use is casted over something in a slot
-				// Compatibility code
-				useItemInSlot(player, action);
-			} else if (action.has(TARGET)) {
-				// Compatibility code
-				useItemOnGround(player, action);
-			}
-			
+	public void onAction(final Player player, final RPAction action) {		
+		String actionZone = action.get("zone");
+		// Always accept actions without the zone. Old clients send those.
+		if (actionZone != null && !actionZone.equals(player.getZone().getName())) {
+			return;
+		}
+		if (action.has(TARGET_PATH)) {
+			useEntityFromPath(player, action);
+		} else if (isItemInSlot(action)) {
+			// When use is casted over something in a slot
+			// Compatibility code
+			useItemInSlot(player, action);
+		} else if (action.has(TARGET)) {
+			// Compatibility code
+			useItemOnGround(player, action);
 		}
 	}
 
@@ -113,14 +108,18 @@ public class UseAction implements ActionListener {
 	}
 
 	private void tryUse(final Player player, final RPObject object) {
-		if (!canUse(player, object)) {
-			return;
-		}
+		// POISON CONDITIONAL 
+		if (!player.hasStatus(StatusType.POISONED)) { // || object.get("class") == "food") {
+		
+			if (!canUse(player, object)) {
+				return;
+			}
 
-		if (object instanceof UseListener) {
-			final UseListener listener = (UseListener) object;
-			logUsage(player, object);
-			listener.onUsed(player);
+			if (object instanceof UseListener) {
+				final UseListener listener = (UseListener) object;
+				logUsage(player, object);
+				listener.onUsed(player);
+			}
 		}
 	}
 
