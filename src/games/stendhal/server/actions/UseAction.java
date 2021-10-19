@@ -23,6 +23,7 @@ import games.stendhal.server.core.events.UseListener;
 import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.entity.status.StatusType;
 import games.stendhal.server.util.EntityHelper;
 import marauroa.common.game.RPAction;
 import marauroa.common.game.RPObject;
@@ -36,7 +37,7 @@ public class UseAction implements ActionListener {
 	}
 
 	@Override
-	public void onAction(final Player player, final RPAction action) {
+	public void onAction(final Player player, final RPAction action) {		
 		String actionZone = action.get("zone");
 		// Always accept actions without the zone. Old clients send those.
 		if (actionZone != null && !actionZone.equals(player.getZone().getName())) {
@@ -107,14 +108,18 @@ public class UseAction implements ActionListener {
 	}
 
 	private void tryUse(final Player player, final RPObject object) {
-		if (!canUse(player, object)) {
-			return;
-		}
+		// POISON CONDITIONAL 
+		if (!player.hasStatus(StatusType.POISONED)) { // || object.get("class") == "food") {
+		
+			if (!canUse(player, object)) {
+				return;
+			}
 
-		if (object instanceof UseListener) {
-			final UseListener listener = (UseListener) object;
-			logUsage(player, object);
-			listener.onUsed(player);
+			if (object instanceof UseListener) {
+				final UseListener listener = (UseListener) object;
+				logUsage(player, object);
+				listener.onUsed(player);
+			}
 		}
 	}
 
