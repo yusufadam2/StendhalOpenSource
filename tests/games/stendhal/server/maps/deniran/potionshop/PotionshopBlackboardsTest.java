@@ -37,7 +37,7 @@ public class PotionshopBlackboardsTest {
 		assertThat(potDealer.getName(), is("Wanda"));
 		final String buys = zone.getEntityAt(5, 6).getTitle();
 		assertThat(buys, is("blackboard"));
-		final String sells = zone.getEntityAt(11, 6).getTitle();
+		final String sells = zone.getEntityAt(10, 6).getTitle();
 		assertThat(sells, is("blackboard"));
 	}
 }
