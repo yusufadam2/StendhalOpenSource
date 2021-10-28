@@ -201,3 +201,17 @@ Notable contributors:
 - SnowFlake
   · Maps maker
   · NPCs
+- Ryan Karibwami
+  ·Bugs Fixer
+- Adrians Skapars
+  ·Bugs Fixer
+- Aryan Agrawal
+  ·Bugs Fixer
+- Vlad-Radu Schiller
+  ·Bugs Fixer
+- Nestor Fok
+  ·Bugs Fixer
+- Richard Lee Chye Soon
+  ·Bugs Fixer
+- Yusuf Adam
+  ·Bugs Fixer
