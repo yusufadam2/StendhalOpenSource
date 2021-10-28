@@ -81,10 +81,6 @@ public class ReverseArrowTest {
 		arrowquest.addToWorld();
 		arrowquest.player = PlayerTestHelper.createPlayer("tom");
 		assertNotNull(arrowquest.player);
-		arrowquest.start(null);
-		arrowquest.onTokenMoved(null, null);
-		arrowquest.onTokenMoved(null, null);
-		arrowquest.onTokenMoved(null, null);
 	}
 
 	/**
