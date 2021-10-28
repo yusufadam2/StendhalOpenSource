@@ -71,6 +71,21 @@ public class ReverseArrowTest {
 		ReverseArrow arrowquest = new ReverseArrow();
 		arrowquest.addToWorld();
 	}
+	
+	/**
+	 * Test for arrow
+	 */
+	@Test
+	public void testReverseArrowCheck() {
+		ReverseArrow arrowquest = new ReverseArrow();
+		arrowquest.addToWorld();
+		arrowquest.player = PlayerTestHelper.createPlayer("tom");
+		assertNotNull(arrowquest.player);
+		arrowquest.start(null);
+		arrowquest.onTokenMoved(null, null);
+		arrowquest.onTokenMoved(null, null);
+		arrowquest.onTokenMoved(null, null);
+	}
 
 	/**
 	 * Tests for finish.
@@ -83,7 +98,6 @@ public class ReverseArrowTest {
 		assertNotNull(arrowquest.player);
 		arrowquest.finish(false, null);
 		assertNotNull(arrowquest.player);
-
 		arrowquest.finish(true, null);
 		assertNull(arrowquest.player);
 	}

@@ -94,6 +94,9 @@ public class ReverseArrow extends AbstractQuest implements
 	protected Player player;
 
 	private Timer timer;
+	
+	// if number
+	private int change = 0;
 
 	/**
 	 * Checks the result.
@@ -143,8 +146,27 @@ public class ReverseArrow extends AbstractQuest implements
 				final Token token = tokens.get(i);
 				if (token.getX() != topX - 1 + i - 1
 						|| token.getY() != topY + 1) {
+					// check new pattern
+					//* * 0 * *
+					//* 1 * 2 *
+					//3 4 5 6 7
+					//* * 8 * *
+					// check the last row and the position of third token
+					Token check8 = tokens.get(8);
+					if (check8.getX() == topX && check8.getY() == topY + 3 
+							&& token.getX() == topX + 1 && token.getY() == topY + 1) {
+						// check the second last row
+						for (int j = 3; j <= 7; j++) {
+							final Token lastrow = tokens.get(i);
+							if (lastrow.getX() == topX - 2 + i - 4
+									|| lastrow.getY() != topY + 2) {
+								return true;
+							}
+						}
+					}
 					return false;
-				}
+				} 
+					
 			}
 
 			// check second row
@@ -155,6 +177,7 @@ public class ReverseArrow extends AbstractQuest implements
 					return false;
 				}
 			}
+			
 
 			return true;
 		}
