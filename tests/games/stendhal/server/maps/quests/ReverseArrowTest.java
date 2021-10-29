@@ -13,6 +13,7 @@
 package games.stendhal.server.maps.quests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -79,8 +80,18 @@ public class ReverseArrowTest {
 	public void testReverseArrowCheck() {
 		ReverseArrow arrowquest = new ReverseArrow();
 		arrowquest.addToWorld();
-		arrowquest.player = PlayerTestHelper.createPlayer("tom");
-		assertNotNull(arrowquest.player);
+		arrowquest.player = PlayerTestHelper.createPlayer("bob");
+		arrowquest.player.onAdded(arrowquest.zone);
+		arrowquest.start(arrowquest.player);
+		arrowquest.tokens.get(8).setPosition(11, 8);
+		arrowquest.onTokenMoved(arrowquest.player, arrowquest.tokens.get(8));
+		arrowquest.tokens.get(7).setPosition(10, 7);
+		arrowquest.onTokenMoved(arrowquest.player, arrowquest.tokens.get(7));
+		arrowquest.tokens.get(5).setPosition(9, 8);
+		arrowquest.onTokenMoved(arrowquest.player, arrowquest.tokens.get(5));
+		ReverseArrow.ReverseArrowCheck check = arrowquest.new ReverseArrowCheck();
+		check.onTurnReached(3);
+		assertTrue(arrowquest.player.isQuestCompleted("reverse_arrow"));
 	}
 
 	/**
