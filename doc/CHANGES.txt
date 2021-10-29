@@ -1,8 +1,19 @@
 Changelog
 ---------
 ---------
+1.36uom
+
+*fixes*
+- fixed Gamblos not accepting player's reversed arrow
+- fixed Solar and Glacier centaur elemental susceptibility
+- Blackboards now visible in Deniran Potion Shop
+- Elvish hat now required for NPC Lupos during quest
+- Teleport scrolls now cannot be used when poisoned
+- Omura Sumitada now only calculates fee if player's attack strength is valid for their level
+- Player now receives 5XP whenever Zynn Iwuhos is asked a question
 
 1.36
+
 *world*
 - building Mine Town Revival Weeks as group quest
 - new item: lamp
